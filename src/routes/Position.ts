@@ -1,51 +1,51 @@
 
 import express from "express";
-import { CompetitionClass } from "../controllers/CompetitionClass";
+import { PositionClass } from "../controllers/Position";
 
-const competiton = new CompetitionClass()
+const position = new PositionClass()
 const router = express.Router();
 
 /** 
  * @openapi 
- * /api/create/competition:
+ * /api/create/position:
  *   post: 
  *     tags:
- *      - Competition
- *     summary: Add Competition
+ *      - Position
+ *     summary: Add a new position
  *     requestBody:
  *      content:
  *       application/json:
  *          schema:
- *              $ref: '#/components/schemas/Competition'
+ *              $ref: '#/components/schemas/Position'
  *     responses:  
  *       201: 
- *         description: Competition created successfully
+ *         description: Created a new position
  *       500:
- *        description: Internal server error 
+ *        description: Internal server error
  *   
  */
-router.post("/create/competition", competiton.addCompetition);
+router.post("/create/position", position.addPosition);
 
 /** 
  * @openapi 
- * /api/update/competition/{id}:
+ * /api/update/position/{id}:
  *   put:
  *     tags:
- *      - Competition
- *     summary: Update Competition
+ *      - Position
+ *     summary: update a position
  *     requestBody:
  *      required: true
  *      content:
  *       application/json:
  *          schema:
- *              $ref: '#/components/schemas/Competition'
+ *              $ref: '#/components/schemas/Position'
  *     parameters:
  *     - in: path
  *       name: id
  *       schema:
  *        type: string
  *       required: true
- *       description: id of the competition to update
+ *       description: id of the position to update
  *     responses:
  *      200:
  *       description: Success
@@ -54,43 +54,41 @@ router.post("/create/competition", competiton.addCompetition);
  *      404:
  *       description: Not found
  *      500:
- *       description: Internal server error
- *   
+ *       description: Internal server error 
  */
-router.put("/update/competition/:id", competiton.updateCompetition);
+router.put("/update/position/:id", position.updatePosition);
 
 /** 
  * @openapi 
- * /api/delete/competition/{id}:
+ * /api/delete/position/{id}:
  *   delete: 
  *     tags:
- *      - Competition
- *     summary: Delete single competition
+ *      - Position
+ *     summary: Delete single position
  *     parameters:
  *     - in: path
  *       name: id
  *       schema:
  *        type: string
  *       required: true
- *       description: id of the competition to delete
+ *       description: id of the position to delete
  *     responses:  
  *       200: 
  *        description: Success
  *       404:
  *         description: Not found
  *       500:
- *         description: Internal server error 
- *   
+ *         description: Internal server error  
  */
-router.delete("/delete/competition/:id", competiton.deleteCompetition);
+router.delete("/delete/position/:id", position.deletePosition);
 
 /** 
  * @openapi 
- * /api/competitions:
+ * /api/positions:
  *   get: 
  *     tags:
- *      - Competition
- *     summary: Get all competitions
+ *      - Position
+ *     summary: Get all positions
  *     responses:  
  *       200: 
  *         description: Success
@@ -99,24 +97,24 @@ router.delete("/delete/competition/:id", competiton.deleteCompetition);
  *   
  */
 router.get(
-    "/competitions",
-    competiton.getCompetitions
+    "/positions",
+    position.getPositions
 );
 
 /** 
  * @openapi 
- * /api/competitions/{id}:
+ * /api/teams/{id}:
  *   get: 
  *     tags:
- *      - Competition
- *     summary: Get single competition by ID
+ *      - Position
+ *     summary: Get single position by id
  *     parameters:
  *     - in: path
  *       name: id
  *       schema:
  *       type: string
  *       required: true
- *       description: id of the competition to get
+ *       description: id of the position to get
  *     responses:  
  *       200: 
  *         description: Success
@@ -125,10 +123,10 @@ router.get(
  *       500:
  *         description: Internal server error 
  */
-router.get(
-    "/competitions/:id",
-    competiton.getCompetition
-)
+    router.get(
+        "/positions/:id",
+        position.getPosition
+    )
 
 
 module.exports = router;

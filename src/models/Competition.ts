@@ -6,7 +6,7 @@ const { Schema } = mongoose;
  * @openapi 
  * components:
  *   schemas: 
- *     createCompetition:
+ *     Competition:
  *      type: object
  *      required:
  *       - name
@@ -17,19 +17,21 @@ const { Schema } = mongoose;
  *       name:
  *        type: string
  *        description: Name of the competition
- *        default: "UEFA Champions League"
+ *        example: "UEFA Champions League"
  *       startDate:
  *        type: string
  *        format: date-time
  *        description: Start date of the competition
+ *        example: "2020-01-01T00:00:00.000Z"
  *       endDate:
  *        type: string
  *        format: date-time
  *        description: End date of the competition
+ *        example: "2020-01-01T00:00:00.000Z"
  *       location:
  *        type: string
  *        description: Location of the competition
- * 
+ *        example: "Berlin"
  */
 
 const CompetitionModel = new Schema(

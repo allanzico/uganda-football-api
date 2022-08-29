@@ -1,51 +1,51 @@
 
 import express from "express";
-import { CompetitionClass } from "../controllers/CompetitionClass";
+import { TeamClass } from "../controllers/Team";
 
-const competiton = new CompetitionClass()
+const team = new TeamClass()
 const router = express.Router();
 
 /** 
  * @openapi 
- * /api/create/competition:
+ * /api/create/team:
  *   post: 
  *     tags:
- *      - Competition
- *     summary: Add Competition
+ *      - Team
+ *     summary: Add a new team
  *     requestBody:
  *      content:
  *       application/json:
  *          schema:
- *              $ref: '#/components/schemas/Competition'
+ *              $ref: '#/components/schemas/Team'
  *     responses:  
  *       201: 
- *         description: Competition created successfully
+ *         description: Team created successfully
  *       500:
- *        description: Internal server error 
+ *        description: Internal server error
  *   
  */
-router.post("/create/competition", competiton.addCompetition);
+router.post("/create/team", team.addTeam);
 
 /** 
  * @openapi 
- * /api/update/competition/{id}:
+ * /api/update/team/{id}:
  *   put:
  *     tags:
- *      - Competition
- *     summary: Update Competition
+ *      - Team
+ *     summary: update a team
  *     requestBody:
  *      required: true
  *      content:
  *       application/json:
  *          schema:
- *              $ref: '#/components/schemas/Competition'
+ *              $ref: '#/components/schemas/Team'
  *     parameters:
  *     - in: path
  *       name: id
  *       schema:
  *        type: string
  *       required: true
- *       description: id of the competition to update
+ *       description: id of the team to update
  *     responses:
  *      200:
  *       description: Success
@@ -57,22 +57,22 @@ router.post("/create/competition", competiton.addCompetition);
  *       description: Internal server error
  *   
  */
-router.put("/update/competition/:id", competiton.updateCompetition);
+router.put("/update/team/:id", team.updateTeam);
 
 /** 
  * @openapi 
- * /api/delete/competition/{id}:
+ * /api/delete/team/{id}:
  *   delete: 
  *     tags:
- *      - Competition
- *     summary: Delete single competition
+ *      - Team
+ *     summary: Delete single team
  *     parameters:
  *     - in: path
  *       name: id
  *       schema:
  *        type: string
  *       required: true
- *       description: id of the competition to delete
+ *       description: id of the team to delete
  *     responses:  
  *       200: 
  *        description: Success
@@ -82,15 +82,15 @@ router.put("/update/competition/:id", competiton.updateCompetition);
  *         description: Internal server error 
  *   
  */
-router.delete("/delete/competition/:id", competiton.deleteCompetition);
+router.delete("/delete/team/:id", team.deleteTeam);
 
 /** 
  * @openapi 
- * /api/competitions:
+ * /api/teams:
  *   get: 
  *     tags:
- *      - Competition
- *     summary: Get all competitions
+ *      - Team
+ *     summary: Get all teams
  *     responses:  
  *       200: 
  *         description: Success
@@ -99,24 +99,24 @@ router.delete("/delete/competition/:id", competiton.deleteCompetition);
  *   
  */
 router.get(
-    "/competitions",
-    competiton.getCompetitions
+    "/teams",
+    team.getTeams
 );
 
 /** 
  * @openapi 
- * /api/competitions/{id}:
+ * /api/teams/{id}:
  *   get: 
  *     tags:
- *      - Competition
- *     summary: Get single competition by ID
+ *      - Team
+ *     summary: Get single team by id
  *     parameters:
  *     - in: path
  *       name: id
  *       schema:
  *       type: string
  *       required: true
- *       description: id of the competition to get
+ *       description: id of the team to get
  *     responses:  
  *       200: 
  *         description: Success
@@ -126,8 +126,8 @@ router.get(
  *         description: Internal server error 
  */
 router.get(
-    "/competitions/:id",
-    competiton.getCompetition
+    "/teams/:id",
+    team.getTeam
 )
 
 

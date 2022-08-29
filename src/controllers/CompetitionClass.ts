@@ -23,8 +23,8 @@ export class CompetitionClass {
         const competition = req.body;
         const id = req.params.id;
         try {
-            await Competition.findByIdAndUpdate(id, competition);
-            res.status(200).json({ success: true, message: "Competition updated successfully",});
+            const updatedCompetition = await Competition.findByIdAndUpdate(id, competition);
+            res.status(200).json({ success: true, message: "Competition updated successfully", data: updatedCompetition });
         } catch (error: any) {
             res.status(500).json({
                 message: "Something went wrong",
