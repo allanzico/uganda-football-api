@@ -30,6 +30,7 @@
   },
   "scripts": {
     "start": "node build/app.js",
+    "postinstall": "tsc",
     "build": "tsc",
     "build:watch": "tsc -w",
     "dev": "npm run build && nodemon build/app.js"
