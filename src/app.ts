@@ -7,10 +7,10 @@ import mongoose from 'mongoose'
 import dotenv from "dotenv"
 import helmet from "helmet"
 import swaggerDocs from "./utils/Swagger"
-import { createProxyMiddleware } from 'http-proxy-middleware'
+// import { createProxyMiddleware } from 'http-proxy-middleware'
 
 dotenv.config()
-
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 
 const app = express()
 const dirPath = path.resolve(__dirname, './routes')
@@ -24,22 +24,29 @@ app.use(helmet({
     crossOriginResourcePolicy: false,
 }));
 
+app.use(expressCspHeader({ 
+    policies: { 
+        'default-src': [expressCspHeader.NONE], 
+        'img-src': [expressCspHeader.SELF], 
+    } 
+}));  
+
 //route middleware
 fs.readdirSync(dirPath).map((r) =>
     app.use('/api', require(`${dirPath}/${r}`))
 )
 
-app.use('/api', createProxyMiddleware({
-  target: `http://localhost:${port}/`, //original url
-  changeOrigin: true,
-  //secure: false,
-  onProxyRes: function (proxyRes, req, res) {
-     proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-  },
-  headers: {
-    "Connection": "keep-alive"
-},
-}));
+// app.use('/api', createProxyMiddleware({
+//   target: `http://localhost:${port}/`, //original url
+//   changeOrigin: true,
+//   //secure: false,
+//   onProxyRes: function (proxyRes, req, res) {
+//      proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+//   },
+//   headers: {
+//     "Connection": "keep-alive"
+// },
+// }));
 
 //Database Connection
 const mongoUrl = <string>process.env['MONGO_URI']
