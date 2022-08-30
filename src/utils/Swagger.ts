@@ -2,8 +2,8 @@ import { Express, Request, Response } from "express";
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import log from "./logger";
-import { port } from "../app";
 
+const port = <string>process.env?.['PORT'] || 5000
 const options: swaggerJsdoc.Options = {
     definition: {
         openapi: "3.0.0",
