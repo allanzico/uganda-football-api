@@ -7,7 +7,6 @@ import mongoose from 'mongoose'
 import dotenv from "dotenv"
 import helmet from "helmet"
 import swaggerDocs from "./utils/Swagger"
-import { createProxyMiddleware } from 'http-proxy-middleware'
 
 dotenv.config()
 const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
@@ -31,22 +30,19 @@ app.use(expressCspHeader({
     } 
 }));  
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+    });
+
 //route middleware
 fs.readdirSync(dirPath).map((r) =>
     app.use('/api', require(`${dirPath}/${r}`))
 )
 
-app.use('/api', createProxyMiddleware({
-  target: `https://uganda-football-api.herokuapp.com/`, //original url
-  changeOrigin: true,
-  //secure: false,
-  onProxyRes: function (proxyRes, req, res) {
-     proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-  },
-  headers: {
-    "Connection": "keep-alive"
-},
-}));
 
 //Database Connection
 const mongoUrl = <string>process.env['MONGO_URI']
