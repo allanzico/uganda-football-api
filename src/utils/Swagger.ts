@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import log from "./logger";
 
+const port = <string>process.env?.['PORT'] || 5000
 const options: swaggerJsdoc.Options = {
     definition: {
         openapi: "3.0.0",
@@ -26,7 +27,7 @@ const options: swaggerJsdoc.Options = {
             }
         ],
         servers: [
-            { url: "http://localhost:5000" }
+            { url: `http://localhost:${port}` }
         ],
 
     },
