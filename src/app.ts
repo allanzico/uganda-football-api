@@ -37,7 +37,7 @@ fs.readdirSync(dirPath).map((r) =>
 )
 
 app.use('/api', createProxyMiddleware({
-  target: `http://localhost:${port}/`, //original url
+  target: `https://uganda-football-api.herokuapp.com/`, //original url
   changeOrigin: true,
   //secure: false,
   onProxyRes: function (proxyRes, req, res) {
