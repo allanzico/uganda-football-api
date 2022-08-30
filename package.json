@@ -29,7 +29,8 @@
     "typescript": "^4.8.2"
   },
   "scripts": {
-    "start": "nodemon build/app.js",
+    "start": "node build/app.js",
+    "postinstall": "tsc",
     "build": "tsc",
     "build:watch": "tsc -w",
     "dev": "npm run build && nodemon build/app.js"
