@@ -7,12 +7,14 @@ import mongoose from 'mongoose'
 import dotenv from "dotenv"
 import helmet from "helmet"
 import swaggerDocs from "./utils/Swagger"
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 dotenv.config()
 
 
 const app = express()
 const dirPath = path.resolve(__dirname, './routes')
+export const port = <string>process.env?.['PORT'] || 5000
 
 //middlewares
 app.use(cors({}))
@@ -27,6 +29,18 @@ fs.readdirSync(dirPath).map((r) =>
     app.use('/api', require(`${dirPath}/${r}`))
 )
 
+app.use('/api', createProxyMiddleware({
+  target: `http://localhost:${port}/`, //original url
+  changeOrigin: true,
+  //secure: false,
+  onProxyRes: function (proxyRes, req, res) {
+     proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+  },
+  headers: {
+    "Connection": "keep-alive"
+},
+}));
+
 //Database Connection
 const mongoUrl = <string>process.env['MONGO_URI']
 mongoose.connect(<string>mongoUrl)
@@ -34,7 +48,7 @@ mongoose.connect(<string>mongoUrl)
     .catch((error) => console.log('database connection failed', error))
 
 //server connection
-const port = <string>process.env?.['PORT'] || 5000
+
 const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`)
     swaggerDocs(app, port)
