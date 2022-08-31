@@ -16,7 +16,7 @@ const dirPath = path.resolve(__dirname, './routes')
 const port = <string>process.env?.['PORT'] || 5000
 
 //middlewares
-app.use(cors({}))
+app.use(cors({ origin: '*'}))
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(helmet({
