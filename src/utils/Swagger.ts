@@ -12,6 +12,7 @@ const options: swaggerJsdoc.Options = {
             version: "1.0.0",
             description: "Uganda Football API documentation",
         },
+        
         // components: {
         //     securitySchemes: {
         //         bearerAuth: {
@@ -32,6 +33,12 @@ const options: swaggerJsdoc.Options = {
 
     },
     apis: ["./src/routes/*.ts", "./src/models/*.ts"],
+    requestInterceptor: (req: Request) => {
+        req.headers['accept'] = 'application/json'
+        req.headers.origin = `http://localhost:${port}`
+
+        return req
+    }
 }
 
 const swaggerSpec = swaggerJsdoc(options)
