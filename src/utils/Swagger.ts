@@ -32,13 +32,14 @@ const options: swaggerJsdoc.Options = {
         ],
 
     },
-    apis: ["./src/routes/*.ts", "./src/models/*.ts"],
     requestInterceptor: (req: Request) => {
         req.headers['accept'] = 'application/json'
         req.headers.origin = `http://localhost:${port}`
 
         return req
-    }
+    },
+    apis: ["./src/routes/*.ts", "./src/models/*.ts"]
+
 }
 
 const swaggerSpec = swaggerJsdoc(options)
@@ -47,7 +48,7 @@ const swaggerSpec = swaggerJsdoc(options)
 function swaggerDocs (app: Express, port: any) {
 
     //swagger Page
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null,swaggerSpec))
 
     //docs in JSON format
     app.get('/api-docs.json', (_req: Request, res: Response) => {
