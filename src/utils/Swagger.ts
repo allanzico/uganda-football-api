@@ -12,20 +12,20 @@ const options: swaggerJsdoc.Options = {
             version: "1.0.0",
             description: "Uganda Football API documentation",
         },
-        components: {
-            securitySchemes: {
-                bearerAuth: {
-                    type: "https",
-                    scheme: "bearer",
-                    bearerFormat: "JWT",
-                }
-            },
-        },
-        security: [
-            {
-                bearerAuth: []
-            }
-        ],
+        // components: {
+        //     securitySchemes: {
+        //         bearerAuth: {
+        //             type: "http",
+        //             scheme: "bearer",
+        //             bearerFormat: "JWT",
+        //         }
+        //     },
+        // },
+        // security: [
+        //     {
+        //         bearerAuth: []
+        //     }
+        // ],
         servers: [
             { url: `http://localhost:${port}` }
         ],
