@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  api:
+    restart: always
+    build: 
+      context: .
+      target: development
+    container_name: api
+    ports:
+      - 5000:5000
+    networks:
+      - uganda-football-api
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - uganda-football-api
+    volumes:
+      - mongo-data:/data/db
+  
+  nginx-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    container_name: nginx-manager
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencryp
+
+networks:
+  uganda-football-api:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
