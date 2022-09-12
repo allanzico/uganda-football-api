@@ -1,8 +1,0 @@
-2022/09/10 17:35:01 [alert] 316#316: 1024 worker_connections are not enough
-2022/09/10 17:35:01 [error] 315#315: *2015 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: localhost-nginx-proxy-manager, request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:80/favicon.ico", host: "istole.it"
-2022/09/10 17:35:01 [alert] 316#316: 1024 worker_connections are not enough
-2022/09/10 17:35:01 [error] 315#315: *4006 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: localhost-nginx-proxy-manager, request: "GET /favicon.png HTTP/1.1", upstream: "http://127.0.0.1:80/favicon.png", host: "istole.it"
-2022/09/10 17:35:01 [alert] 316#316: 1024 worker_connections are not enough
-2022/09/10 17:35:01 [error] 315#315: *6009 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: localhost-nginx-proxy-manager, request: "GET /favicon.gif HTTP/1.1", upstream: "http://127.0.0.1:80/favicon.gif", host: "istole.it"
-2022/09/10 17:35:01 [alert] 316#316: 1024 worker_connections are not enough
-2022/09/10 17:35:01 [error] 315#315: *7954 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: localhost-nginx-proxy-manager, request: "GET /favicon.jpg HTTP/1.1", upstream: "http://127.0.0.1:80/favicon.jpg", host: "istole.it"
